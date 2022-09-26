@@ -14,3 +14,10 @@ export const getTopics = () => {
         return res.data
     })
 }
+
+export const getArticlesByTopic = (topic) => {
+    console.log(topic)
+    return newsApi.get(`/articles?topic=${topic}`).then((res) => {
+        return res.data
+    })
+}
