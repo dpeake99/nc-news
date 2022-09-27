@@ -26,3 +26,8 @@ export const getSingleArticle = (articleId) => {
         return res.data
     })
 }
+
+export const updateVotes = (votes, articleId) => {
+    const patchMessage = {"inc_votes": votes}
+    return newsApi.patch(`/articles/${articleId}`, patchMessage)
+}
