@@ -24,6 +24,7 @@ const SingleArticle = () => {
         })
     },[article_id])
 
+
     const increaseVote = () => {
         setArticleVotes((currCount) => currCount + 1)
             updateVotes(1, article_id)
