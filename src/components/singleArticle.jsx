@@ -6,6 +6,7 @@ import { getSingleArticle, updateVotes } from "../utils/api";
 const SingleArticle = () => {
 
     const [currentArticle, setCurrentArticle] = useState({})
+    const [articleVotes, setArticleVotes] = useState(0)
     const [isLoading, setIsLoading] = useState(true)
     const [isError, setIsError] = useState(false)
     let {article_id} = useParams()
@@ -14,23 +15,15 @@ const SingleArticle = () => {
         getSingleArticle(article_id)
         .then((data) => {
             setCurrentArticle(data.article);
+            setArticleVotes(data.article.votes)
             setIsLoading(false);
         })
-    })
+    },[])
 
     const increaseVoteCount = () => {
-        console.log(currentArticle)
-        setCurrentArticle({
-            article_id: currentArticle.article_id,
-            author: currentArticle.author,
-            body: currentArticle.body,
-            comment_count: currentArticle.comment_count,
-            created_at: currentArticle.created_at,
-            title: currentArticle.title,
-            topic: currentArticle.topic,
-            votes: currentArticle.votes+1
-        })
-        console.log(currentArticle.votes)
+        console.log(articleVotes)
+        setArticleVotes((currCount) => currCount + 1)
+        console.log(articleVotes)
     }
 
     const IncreaseVote = () => {
@@ -42,8 +35,6 @@ const SingleArticle = () => {
             
     }
 
-
-
     if(isLoading) return <p>Loading Article...</p>
     if(isError) return <p>Ooops...Something went wrong</p>
     
@@ -53,12 +44,12 @@ const SingleArticle = () => {
                 <h3>Written by: {currentArticle.author}</h3>
                 <h4>{currentArticle.body}</h4>
                 <p>Date published: {currentArticle.created_at}</p>
-                <p>Votes: {currentArticle.votes}</p>
+                <p>Votes: {articleVotes}</p>
                 <button onClick={IncreaseVote}>Vote</button>
                 <p>Comments: {currentArticle.comment_count}</p>
                     <p><Link to="/articles">Return to all articles</Link></p>
             </article>      
-            ) 
+        ) 
 }
 
 export default SingleArticle
