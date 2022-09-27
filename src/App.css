@@ -71,4 +71,10 @@
   padding-top: 100px;
 }
 
+.commentCard {
+  display: inline-table;
+  height: 200px;
+  width: 500px;
+}
+
 

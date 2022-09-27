@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getSingleArticle, updateVotes } from "../utils/api";
+import Comments from "./comments";
 
 
 const SingleArticle = () => {
@@ -56,7 +57,8 @@ const SingleArticle = () => {
                 <p>Votes: {currentArticle.votes}</p>
                 <button onClick={IncreaseVote}>Vote</button>
                 <p>Comments: {currentArticle.comment_count}</p>
-                    <p><Link to="/articles">Return to all articles</Link></p>
+                <p><Link to="/articles">Return to all articles</Link></p>
+                <Comments articleId={article_id} />
             </article>      
             ) 
 }
