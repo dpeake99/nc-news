@@ -31,3 +31,7 @@ export const updateVotes = (votes, articleId) => {
     const patchMessage = {"inc_votes": votes}
     return newsApi.patch(`/articles/${articleId}`, patchMessage)
 }
+
+export const getArticleComments = (articleId) => {
+    return newsApi.get(`/articles/${articleId}/comments`)
+}

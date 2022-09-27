@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getSingleArticle, updateVotes } from "../utils/api";
+import Comments from "./comments";
 
 
 const SingleArticle = () => {
@@ -18,16 +19,14 @@ const SingleArticle = () => {
             setArticleVotes(data.article.votes)
             setIsLoading(false);
         })
-    },[])
+        .catch((err)=> {
+            setIsError(true)
+        })
+    },[article_id])
 
-    const increaseVoteCount = () => {
-        console.log(articleVotes)
+
+    const increaseVote = () => {
         setArticleVotes((currCount) => currCount + 1)
-        console.log(articleVotes)
-    }
-
-    const IncreaseVote = () => {
-            increaseVoteCount()
             updateVotes(1, article_id)
             .catch((err) => {
                 setIsError(true)
@@ -45,9 +44,10 @@ const SingleArticle = () => {
                 <h4>{currentArticle.body}</h4>
                 <p>Date published: {currentArticle.created_at}</p>
                 <p>Votes: {articleVotes}</p>
-                <button onClick={IncreaseVote}>Vote</button>
+                <button onClick={increaseVote}>Vote</button>
                 <p>Comments: {currentArticle.comment_count}</p>
-                    <p><Link to="/articles">Return to all articles</Link></p>
+                <p><Link to="/articles">Return to all articles</Link></p>
+                <Comments articleId={article_id} />
             </article>      
         ) 
 }
