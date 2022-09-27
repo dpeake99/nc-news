@@ -1,11 +1,11 @@
 import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getSingleArticle, updateVotes } from "../utils/api";
+import dayjs from "dayjs";
 import Comments from "./comments";
 
 
 const SingleArticle = () => {
-
     const [currentArticle, setCurrentArticle] = useState({})
     const [articleVotes, setArticleVotes] = useState(0)
     const [isLoading, setIsLoading] = useState(true)
@@ -41,12 +41,12 @@ const SingleArticle = () => {
                 <h2>{currentArticle.title}</h2>
                 <h3>Written by: {currentArticle.author}</h3>
                 <h4>{currentArticle.body}</h4>
-                <p>Date published: {currentArticle.created_at}</p>
+                <p>Date published: {dayjs(currentArticle.created_at).format('DD/MM/YYYY HH:mm')}</p>
                 <p>Votes: {articleVotes}</p>
                 <button onClick={increaseVote}>Vote</button>
                 <p>Comments: {currentArticle.comment_count}</p>
-                <p><Link to="/articles">Return to all articles</Link></p>
                 <Comments articleId={article_id} />
+                <p><Link to="/articles">Return to all articles</Link></p>
             </article>      
         ) 
 }

@@ -1,4 +1,3 @@
-import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { Link } from 'react-router-dom';
 
@@ -13,7 +12,7 @@ const ArticleCard = ({article}) => {
       </CardContent>
       <Link to = {`/articles/${article.article_id}`}>Read</Link>
       </div>
-        )
+    )
 }
 
 export default ArticleCard
