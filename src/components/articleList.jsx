@@ -5,14 +5,18 @@ import ArticleCard from './articleCard'
 const ArticleList = () => {
 
     const [articleItems, setArticleItems] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
     
     useEffect(() => {
         getArticles()
         .then((data) => {
-                setArticleItems(data);
+                setArticleItems(data)
+                setIsLoading(false);
             })
     }, [])
     
+    if(isLoading) return <p>Loading Articles...</p>
+
     return (
         <div>
             <label><h2>Today's articles</h2></label>
