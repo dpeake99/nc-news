@@ -11,6 +11,8 @@ const ArticleCard = ({article}) => {
         </h3>
         <p>written by {article.author}</p>
         <p>{dayjs(article.created_at).format('DD/MM/YYYY HH:mm')}</p>
+        <p>Comment Count: {article.comment_count}</p>
+        <p>Votes: {article.votes}</p>
       </CardContent>
       <Link to = {`/articles/${article.article_id}`}>Read</Link>
       </div>

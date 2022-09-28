@@ -3,26 +3,26 @@ import {getArticlesByTopic} from '../utils/api'
 import ArticleCard from './articleCard'
 import SortBy from './sortBy'
 
-const ArticleListByTopic = (topic) => {
+const ArticleListByTopic = ({topic, sortedBy, setSortedBy, orderedBy, setOrderedBy}) => {
 
     const [topicArticleItems, setTopicArticleItems] = useState([])
     const [isLoading, setIsLoading] = useState(true)
       
     useEffect(() => {
         setIsLoading(true)
-        getArticlesByTopic(topic.topic)
+        getArticlesByTopic(topic, sortedBy, orderedBy)
         .then((data) => {
                 setTopicArticleItems(data);
                 setIsLoading(false)
             })
-    },[topic.topic])
+    },[topic, sortedBy, orderedBy])
     
     if(isLoading) return <p>Loading Articles...</p>
 
     return (
         <div>
-            <SortBy />
-            <label><h2>Today's {topic.topic} articles</h2></label>
+            <SortBy setSortedBy={setSortedBy} setOrderedBy={setOrderedBy} sortedBy={sortedBy} orderedBy={orderedBy}/>
+            <label><h2>Today's {topic} articles</h2></label>
             <ul className = "lister">
                 {topicArticleItems.map((articleItem) => {
                     return <ArticleCard key = {articleItem.article_id} article = {articleItem} />
