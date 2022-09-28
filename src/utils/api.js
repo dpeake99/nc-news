@@ -3,8 +3,8 @@ import axios from "axios";
 const newsApi = axios.create({
     baseURL: "https://be-portfolio-project.herokuapp.com/api"
 })
-export const getArticles = () => {
-    return newsApi.get('/articles').then((res) => {
+export const getArticles = (sortedBy, orderedBy) => {
+    return newsApi.get(`/articles/?sort_by=${sortedBy}&order=${orderedBy}`).then((res) => {
         return res.data
     })
 }
@@ -15,10 +15,14 @@ export const getTopics = () => {
     })
 }
 
-export const getArticlesByTopic = (topic) => {
-    return newsApi.get(`/articles?topic=${topic}`).then((res) => {
+export const getArticlesByTopic = (topic, sortedBy, orderedBy) => {
+    if(topic==="") {return newsApi.get(`/articles/?sort_by=${sortedBy}&order=${orderedBy}`).then((res) => {
         return res.data
-    })
+        })
+    } else { return newsApi.get(`/articles?topic=${topic}&sort_by=${sortedBy}&order=${orderedBy}`).then((res) => {
+        return res.data
+        })
+    }
 }
 
 export const getSingleArticle = (articleId) => {
@@ -40,4 +44,10 @@ export const postNewComment = (articleId, comment, username) => {
     console.log("article=",articleId, "comment=", comment,"username=", username)
     const postMessage = {"body": comment, "username": username}
     return newsApi.post(`/articles/${articleId}/comments`, postMessage)
+}
+
+export const deleteArticleComment = (commentId) => {
+    return newsApi.delete(`/comments/${commentId}`).then((res) => {
+        return res.data
+    })
 }
