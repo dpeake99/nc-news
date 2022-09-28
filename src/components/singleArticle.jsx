@@ -26,11 +26,10 @@ const SingleArticle = () => {
 
     const increaseVote = () => {
         setArticleVotes((currCount) => currCount + 1)
-            updateVotes(1, article_id)
-            .catch((err) => {
-                setIsError(true)
-            })
-            
+        updateVotes(1, article_id)
+        .catch((err) => {
+            setIsError(true)
+        })
     }
 
     if(isLoading) return <p>Loading Article...</p>
@@ -45,7 +44,7 @@ const SingleArticle = () => {
                 <p>Votes: {articleVotes}</p>
                 <button onClick={increaseVote}>Vote</button>
                 <p>Comments: {currentArticle.comment_count}</p>
-                <Comments articleId={article_id} setCurrentArticle={setCurrentArticle} />
+                <Comments articleId={article_id}/>
                 <p><Link to="/articles">Return to all articles</Link></p>
             </article>      
         ) 
