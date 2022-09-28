@@ -1,6 +1,7 @@
 import { getArticleComments } from "../utils/api";
 import { useState, useEffect } from "react";
 import CommentCard from "./commentCard";
+import { NewCommentForm } from "./newCommentForm";
 
 const Comments = (articleId) => {
 
@@ -10,11 +11,10 @@ const Comments = (articleId) => {
     useEffect(() => {
         getArticleComments(articleId.articleId)
         .then((data) => {
-                console.log(data.data)
                 setArticleComments(data.data)
                 setIsLoading(false);
             })
-    }, [])
+    }, [articleId.articleId])
     
     if(isLoading) return <p>Loading Comments...</p>
 
@@ -26,6 +26,7 @@ const Comments = (articleId) => {
                     return <CommentCard key = {articleComment.comment_id} comment = {articleComment} />
                 })}
             </ul>
+            <NewCommentForm articleId = {articleId.articleId} setArticleComments={setArticleComments} setIsLoading={setIsLoading} />
         </div>
     )
 

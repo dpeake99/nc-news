@@ -35,3 +35,9 @@ export const updateVotes = (votes, articleId) => {
 export const getArticleComments = (articleId) => {
     return newsApi.get(`/articles/${articleId}/comments`)
 }
+
+export const postNewComment = (articleId, comment, username) => {
+    console.log("article=",articleId, "comment=", comment,"username=", username)
+    const postMessage = {"body": comment, "username": username}
+    return newsApi.post(`/articles/${articleId}/comments`, postMessage)
+}
