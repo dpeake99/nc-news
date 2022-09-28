@@ -3,18 +3,18 @@ import { useState, useEffect } from "react";
 import CommentCard from "./commentCard";
 import { NewCommentForm } from "./newCommentForm";
 
-const Comments = (articleId) => {
+const Comments = ({articleId}) => {
 
     const [articleComments, setArticleComments] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        getArticleComments(articleId.articleId)
+        getArticleComments(articleId)
         .then((data) => {
                 setArticleComments(data.data)
                 setIsLoading(false);
             })
-    }, [articleId.articleId])
+    }, [articleId])
     
     if(isLoading) return <p>Loading Comments...</p>
 
@@ -23,10 +23,10 @@ const Comments = (articleId) => {
             <label><h2>Article Comments</h2></label>
             <ul className = "lister">
                 {articleComments.map((articleComment) => {
-                    return <CommentCard key = {articleComment.comment_id} comment = {articleComment} />
+                    return <CommentCard key = {articleComment.comment_id} comment = {articleComment} setArticleComments={setArticleComments} articleId={articleId} setIsLoading={setIsLoading} />
                 })}
             </ul>
-            <NewCommentForm articleId = {articleId.articleId} setArticleComments={setArticleComments} setIsLoading={setIsLoading} />
+            <NewCommentForm articleId = {articleId} setArticleComments={setArticleComments} setIsLoading={setIsLoading} />
         </div>
     )
 

@@ -16,9 +16,13 @@ export const getTopics = () => {
 }
 
 export const getArticlesByTopic = (topic, sortedBy, orderedBy) => {
-    return newsApi.get(`/articles?topic=${topic}&sort_by=${sortedBy}&order=${orderedBy}`).then((res) => {
+    if(topic==="") {return newsApi.get(`/articles/?sort_by=${sortedBy}&order=${orderedBy}`).then((res) => {
         return res.data
-    })
+        })
+    } else { return newsApi.get(`/articles?topic=${topic}&sort_by=${sortedBy}&order=${orderedBy}`).then((res) => {
+        return res.data
+        })
+    }
 }
 
 export const getSingleArticle = (articleId) => {
@@ -40,4 +44,10 @@ export const postNewComment = (articleId, comment, username) => {
     console.log("article=",articleId, "comment=", comment,"username=", username)
     const postMessage = {"body": comment, "username": username}
     return newsApi.post(`/articles/${articleId}/comments`, postMessage)
+}
+
+export const deleteArticleComment = (commentId) => {
+    return newsApi.delete(`/comments/${commentId}`).then((res) => {
+        return res.data
+    })
 }
