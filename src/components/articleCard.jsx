@@ -1,5 +1,6 @@
 import CardContent from '@mui/material/CardContent';
 import { Link } from 'react-router-dom';
+import dayjs from 'dayjs';
 
 const ArticleCard = ({article}) => {
     return(
@@ -9,6 +10,7 @@ const ArticleCard = ({article}) => {
           {article.title}
         </h3>
         <p>written by {article.author}</p>
+        <p>{dayjs(article.created_at).format('DD/MM/YYYY HH:mm')}</p>
       </CardContent>
       <Link to = {`/articles/${article.article_id}`}>Read</Link>
       </div>

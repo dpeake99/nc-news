@@ -26,7 +26,7 @@ const Comments = (articleId) => {
                     return <CommentCard key = {articleComment.comment_id} comment = {articleComment} />
                 })}
             </ul>
-            <NewCommentForm articleId = {articleId.articleId} />
+            <NewCommentForm articleId = {articleId.articleId} setArticleComments={setArticleComments} setIsLoading={setIsLoading} />
         </div>
     )
 

@@ -1,7 +1,8 @@
 import { postNewComment } from "../utils/api"
 import { useState } from "react"
+import { getArticleComments } from "../utils/api"
 
-export const NewCommentForm =(articleId) => {
+export const NewCommentForm =({articleId, setArticleComments, setIsLoading}) => {
 
     const [userName, setUserName] = useState("")
     const [commentBody, setCommentBody] = useState("")
@@ -9,13 +10,20 @@ export const NewCommentForm =(articleId) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(articleId.articleId)
-        postNewComment(articleId.articleId, commentBody, userName)
-        .then(
-            setPostSuccessful(true),
-            setUserName(""),
+        console.log(articleId)
+        postNewComment(articleId, commentBody, userName)
+        .then((data) => {
+            setPostSuccessful(true)
+            setUserName("")
             setCommentBody("")
-        )
+            getArticleComments(articleId)
+            .then((data) => {
+                setArticleComments(data.data)
+                setIsLoading(false);
+            })
+        })
+        
+
     }
 
     const anotherComment = () => {

@@ -45,7 +45,7 @@ const SingleArticle = () => {
                 <p>Votes: {articleVotes}</p>
                 <button onClick={increaseVote}>Vote</button>
                 <p>Comments: {currentArticle.comment_count}</p>
-                <Comments articleId={article_id} />
+                <Comments articleId={article_id} setCurrentArticle={setCurrentArticle} />
                 <p><Link to="/articles">Return to all articles</Link></p>
             </article>      
         ) 

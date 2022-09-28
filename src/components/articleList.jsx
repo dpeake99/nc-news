@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react'
 import { getArticles } from '../utils/api'
 import ArticleCard from './articleCard'
+import SortBy from './sortBy'
 
 const ArticleList = () => {
 
@@ -19,6 +20,7 @@ const ArticleList = () => {
 
     return (
         <div>
+            <SortBy />
             <label><h2>Today's articles</h2></label>
             <ul className = "lister">
                 {articleItems.map((articleItem) => {
