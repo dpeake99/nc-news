@@ -32,7 +32,6 @@ const ArticleListByTopic = ({topic}) => {
             </ul>
         </div>
     )
-
 }
 
 export default ArticleListByTopic
