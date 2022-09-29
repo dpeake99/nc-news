@@ -11,7 +11,6 @@ const SortBy = ({setSortedBy, setOrderedBy, sortedBy, orderedBy}) => {
                             <option value="comment_count">Comments</option>
                             <option value="votes">Votes</option>
                         </select>
-
                     </li>
                     <li>
                         <select onChange={(e) => setOrderedBy(e.target.value)} name="order" id="order" value={orderedBy}>

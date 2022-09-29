@@ -22,8 +22,6 @@ export const NewCommentForm =({articleId, setArticleComments, setIsLoading}) => 
                 setIsLoading(false);
             })
         })
-        
-
     }
 
     const anotherComment = () => {
@@ -57,5 +55,4 @@ export const NewCommentForm =({articleId, setArticleComments, setIsLoading}) => 
         </ul>
     </form>
     )
-
 }
