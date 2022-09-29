@@ -44,7 +44,5 @@ export const postNewComment = (articleId, comment, username) => {
 }
 
 export const deleteArticleComment = (commentId) => {
-    return newsApi.delete(`/comments/${commentId}`).then((res) => {
-        return res.data
-    })
+    return newsApi.delete(`/comments/${commentId}`)
 }

@@ -7,10 +7,10 @@ export const NewCommentForm =({articleId, setArticleComments, setIsLoading}) => 
     const [userName, setUserName] = useState("")
     const [commentBody, setCommentBody] = useState("")
     const [postSuccessful, setPostSuccessful] =useState(false)
+    const [usernameError, setUsernameError] =useState(null)
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(articleId)
         postNewComment(articleId, commentBody, userName)
         .then((data) => {
             setPostSuccessful(true)
@@ -22,10 +22,28 @@ export const NewCommentForm =({articleId, setArticleComments, setIsLoading}) => 
                 setIsLoading(false);
             })
         })
+        .catch((err) => {
+            setUsernameError({err})
+        })
     }
 
     const anotherComment = () => {
         setPostSuccessful(false)
+    }
+
+    const okayError =() => {
+        setUsernameError(null)
+    }
+
+    if(usernameError) {
+        if(usernameError.err.message === "Network Error"){
+            return(<p>Unable to connect to server... please check your connection and try again later.</p>)
+        }else{
+            return (<div>
+                <p>Invalid username...</p>
+                <button onClick={okayError}>Okay</button>
+            </div>)
+        }
     }
 
     if (postSuccessful) {return (

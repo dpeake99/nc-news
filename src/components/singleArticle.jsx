@@ -9,13 +9,13 @@ const SingleArticle = () => {
     const [currentArticle, setCurrentArticle] = useState({})
     const [articleVotes, setArticleVotes] = useState(0)
     const [isLoading, setIsLoading] = useState(true)
+    const [voteError, setVoteError] =useState(null)
     const [error, setError] = useState(false)
     let {article_id} = useParams()
 
     useEffect(() => {
         getSingleArticle(article_id)
         .then((data) => {
-            console.log(data)
             setCurrentArticle(data.article);
             setArticleVotes(data.article.votes)
             setIsLoading(false);
@@ -30,7 +30,7 @@ const SingleArticle = () => {
         setArticleVotes((currCount) => currCount + 1)
         updateVotes(1, article_id)
         .catch((err) => {
-            setError({err})
+            setVoteError({err})
         })
     }
 
@@ -41,6 +41,10 @@ const SingleArticle = () => {
             <p>This article does not exist</p>
             <p><Link to="/">Return to all Articles</Link></p>
         </div>
+    )
+
+    if(voteError) return(
+        <p>Unable to connect to server... please check your connection and try again later.</p>
     )
     
         return (

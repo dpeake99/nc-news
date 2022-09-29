@@ -5,6 +5,7 @@ import { deleteArticleComment,getArticleComments } from '../utils/api';
 const CommentCard = ({comment, setArticleComments, articleId, setIsLoading}) => {
 
     const [commentToDelete, setCommentToDelete] = useState(0)
+    const [error, setError] = useState(null)
 
         useEffect(() => {
             if (commentToDelete !== 0){
@@ -16,9 +17,14 @@ const CommentCard = ({comment, setArticleComments, articleId, setIsLoading}) => 
                         setArticleComments(data.data)
                         setIsLoading(false);
                     })
+                }).catch((err)=> {
+                    setIsLoading(false);
+                    setError({err})
                 })
             }
         })
+
+    if (error) return (<p>Something went wrong... please check your connection and try again later</p>)
 
     return(
         <div className = "commentCard">
