@@ -40,14 +40,14 @@ export const NewCommentForm =({articleId, setArticleComments, setIsLoading}) => 
         <ul className="form-style-1">
             <li><h2>Post a Comment</h2></li>
             <li>
-                <label>UserName: <span className="required">*</span></label>
-                <input type="text" value={userName} name="name"
-                       onChange={(e) => setUserName(e.target.value)} className="field-long"/>
+                <label>UserName: <span className="required">*</span>
+                <input required type="text" value={userName} name="name"
+                       onChange={(e) => setUserName(e.target.value)} className="field-long"/></label>
             </li>
             <li>
-                <label>Comment <span className="required">*</span></label>
-                <input type="text" value={commentBody} name="description"
-                       onChange={(e) => setCommentBody(e.target.value)} className="field-tall"/>
+                <label>Comment <span className="required">*</span>
+                <input required type="text" value={commentBody} name="description"
+                       onChange={(e) => setCommentBody(e.target.value)} className="field-tall"/></label>
             </li>
             <li>
                 <input type="submit" value="Post Comment"/>

@@ -3,11 +3,6 @@ import axios from "axios";
 const newsApi = axios.create({
     baseURL: "https://be-portfolio-project.herokuapp.com/api"
 })
-export const getArticles = (sortedBy, orderedBy) => {
-    return newsApi.get(`/articles/?sort_by=${sortedBy}&order=${orderedBy}`).then((res) => {
-        return res.data
-    })
-}
 
 export const getTopics = () => {
     return newsApi.get('/topics').then((res) => {
@@ -15,14 +10,17 @@ export const getTopics = () => {
     })
 }
 
-export const getArticlesByTopic = (topic, sortedBy, orderedBy) => {
-    if(topic==="") {return newsApi.get(`/articles/?sort_by=${sortedBy}&order=${orderedBy}`).then((res) => {
-        return res.data
-        })
-    } else { return newsApi.get(`/articles?topic=${topic}&sort_by=${sortedBy}&order=${orderedBy}`).then((res) => {
-        return res.data
-        })
-    }
+export const getArticlesByTopic = (articleTopic, sortedBy, orderedBy) => {
+return newsApi.get(`/articles`,{
+    params: {
+        topic: articleTopic,
+        sort_by: sortedBy,
+        order: orderedBy
+    },
+    
+}).then((res) => {
+    return res.data
+    })
 }
 
 export const getSingleArticle = (articleId) => {
@@ -41,7 +39,6 @@ export const getArticleComments = (articleId) => {
 }
 
 export const postNewComment = (articleId, comment, username) => {
-    console.log("article=",articleId, "comment=", comment,"username=", username)
     const postMessage = {"body": comment, "username": username}
     return newsApi.post(`/articles/${articleId}/comments`, postMessage)
 }

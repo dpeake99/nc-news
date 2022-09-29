@@ -9,18 +9,20 @@ const SingleArticle = () => {
     const [currentArticle, setCurrentArticle] = useState({})
     const [articleVotes, setArticleVotes] = useState(0)
     const [isLoading, setIsLoading] = useState(true)
-    const [isError, setIsError] = useState(false)
+    const [error, setError] = useState(false)
     let {article_id} = useParams()
 
     useEffect(() => {
         getSingleArticle(article_id)
         .then((data) => {
+            console.log(data)
             setCurrentArticle(data.article);
             setArticleVotes(data.article.votes)
             setIsLoading(false);
         })
         .catch((err)=> {
-            setIsError(true)
+            setIsLoading(false)
+            setError({err})
         })
     },[article_id])
 
@@ -28,12 +30,18 @@ const SingleArticle = () => {
         setArticleVotes((currCount) => currCount + 1)
         updateVotes(1, article_id)
         .catch((err) => {
-            setIsError(true)
+            setError({err})
         })
     }
 
     if(isLoading) return <p>Loading Article...</p>
-    if(isError) return <p>Ooops...Something went wrong</p>
+    if(error) return (
+        <div>
+            <h1>Oops... something went wrong!</h1>
+            <p>This article does not exist</p>
+            <p><Link to="/">Return to all Articles</Link></p>
+        </div>
+    )
     
         return (
             <article className="article">
