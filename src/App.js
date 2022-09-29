@@ -10,13 +10,19 @@ import { getTopics } from './utils/api';
 function App() {
 
   const [topics, setTopics] = useState([])
+  const [topicError, setTopicError] = useState(null)
 
   useEffect(() => {
     getTopics()
     .then(({topics}) => {
       setTopics(topics);
-        })
+    })
+    .catch((err) => {
+      setTopicError({err})
+    })
 },[])
+
+if(topicError) return(<p>Something went wrong... Please try again later</p>)
 
 
   return (
