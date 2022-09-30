@@ -5,7 +5,7 @@ The deployed version of this front end application can be found here: https://63
 The app can be cloned from the following repo: https://github.com/dpeake99/nc-news
 In order to run the project locally, run the command "git clone https://github.com/dpeake99/nc-news.git" in the desired repository.
 Once cloned, enter the nc-news repository using the command "cd nc-news".
-From withing the nc-news repository, run "npm start" to deploy the project locally.
+From withing the nc-news repository, run "npm install" followed by "npm start" to deploy the project locally.
 
 In order to run the app locally, a minimum node version of v16.17.0 is required. 
 
